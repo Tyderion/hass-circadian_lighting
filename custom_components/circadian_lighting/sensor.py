@@ -41,8 +41,8 @@ class CircadianSensor(Entity):
         self._cl = cl
         self._name = 'Circadian Values'
         self._entity_id = 'sensor.circadian_values'
-        self._state = self._cl.data['percent']
-        self._unit_of_measurement = '%'
+        self._state = int(round(self._cl.data['colortemp']))
+        self._unit_of_measurement = 'K'
         self._icon = ICON
         self._hs_color = self._cl.data['hs_color']
         self._attributes = {}
@@ -96,7 +96,7 @@ class CircadianSensor(Entity):
 
     def update_sensor(self):
         if self._cl.data is not None:
-            self._state = self._cl.data['percent']
+            self._state = int(round(self._cl.data['colortemp']))
             self._hs_color = self._cl.data['hs_color']
             self._attributes['colortemp'] = self._cl.data['colortemp']
             self._attributes['rgb_color'] = self._cl.data['rgb_color']
